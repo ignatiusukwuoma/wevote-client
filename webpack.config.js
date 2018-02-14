@@ -1,7 +1,12 @@
 const path =  require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+require('dotenv').config();
+const envDefinePlugin = new webpack.DefinePlugin({
+    'process.env.API_URL': JSON.stringify(process.env.API_URL),
+    'process.env.API_URL_LOCAL': JSON.stringify(process.env.API_URL_LOCAL),
+});
 
 module.exports = {
     devtool: 'inline-source-map',
@@ -22,10 +27,9 @@ module.exports = {
                 ]
             },
             {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract({
-                    use: ['css-loader', 'sass-loader']
-                })
+                test: /\.s*css$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
+
             },
             {
                 test: /\.(jpg|png|svg|gif)$/,
@@ -37,15 +41,16 @@ module.exports = {
         contentBase: path.join(__dirname, "dist"),
         host: '127.0.0.1',
         compress: true,
-        port: 9000
+        port: 9000,
+        historyApiFallback: true,
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
+        envDefinePlugin,
         new HtmlWebpackPlugin({
             template: 'src/index.html',
-        }),
-        new ExtractTextPlugin('style.css'),
+        })
     ],
     resolve: {
         extensions: ['.js', '.jsx']
