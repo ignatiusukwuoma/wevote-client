@@ -10,6 +10,8 @@ import RegistrationStatus from '../Snippets/RegistrationStatus';
 import Bio from '../Snippets/Bio';
 import Save from '../Snippets/Save';
 import Result from '../Snippets/Result';
+import Stepper from 'react-stepper-horizontal';
+import { isMobile } from 'react-device-detect';
 
 import { signUp, getUser } from '../../actions/userActions';
 import { saveVri, getUserVri } from '../../actions/vriActions';
@@ -22,10 +24,11 @@ import actionTypes from '../../actions/constants';
 const { START, CARD, PROXIMITY, YEAR, STATUS, BIO, SAVE, RESULT } = actionTypes;
 
 class VoterReadiness extends Component {
+	sections = [START, CARD, PROXIMITY, YEAR, STATUS, BIO, SAVE];
     constructor(props){
         super(props);
         this.state = {
-            section: START,
+			section: START,
             responses: {},
             recommendations: [],
             score: 0,
@@ -37,7 +40,12 @@ class VoterReadiness extends Component {
                 sex: '',
                 phone: '',
                 email: ''
-            },
+			},
+			steps: this.sections.map(section => ({
+				title: section,
+				href: '#',
+			})),
+			currentStep: 0,
             errors: {},
         };
         this.handleSignUpChange = this.handleSignUpChange.bind(this);
@@ -88,7 +96,7 @@ class VoterReadiness extends Component {
     }
 
     goToNext(section) {
-        this.setState({ section });
+        this.setState({ section, currentStep: this.sections.indexOf(section) });
     }
 
     onSave(event) {
@@ -112,7 +120,6 @@ class VoterReadiness extends Component {
     onBioSubmit(event) {
         event.preventDefault();
         const { valid, errors } = validate.bio(this.state.userDetails);
-        console.log('Valid', valid, 'Errors', errors);
         if (valid) {
             this.goToNext(SAVE);
         } else {
@@ -127,10 +134,18 @@ class VoterReadiness extends Component {
     }
 
     render(){
-        const { section, userDetails, errors } = this.state;
-        console.log('State', this.state);
+        const { section, userDetails, steps, currentStep, errors } = this.state;
         return (
             <div className="vri">
+                {section !== RESULT &&
+                <Stepper
+					className="steps"
+					steps={ steps }
+					activeStep={ currentStep }
+					titleFontSize= { isMobile ? 0: 16 }
+					activeBorderStyle="solid"
+					activeBorderColor="#3004E0"
+				/>}
                 {section === START &&
                 <Start
                     handleChange={this.handleChange}
