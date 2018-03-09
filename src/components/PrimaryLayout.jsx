@@ -3,10 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-import { login, selectModal } from '../actions/userActions';
-import actionTypes from '../actions/constants';
-const { SIGN_IN_AJAX } = actionTypes;
-
 import News from './Pages/News';
 import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
@@ -15,9 +11,13 @@ import VoterReadiness from './Pages/VoterReadiness';
 import Candidates from './Pages/Candidates';
 import ElectionStructure from './Pages/ElectionStructure';
 import ModalController from './Modals/ModalController';
+import Notifier from "./Pages/Notifier";
 
-import loader from '../assets/loader.gif';
+import { login, selectModal } from '../actions/userActions';
 import setAccessToken from "../utils/setAccessToken";
+import actionTypes from '../actions/constants';
+import loader from '../assets/loader.gif';
+const { SIGN_IN_AJAX } = actionTypes;
 
 class PrimaryLayout extends Component {
     constructor(props) {
@@ -67,6 +67,7 @@ class PrimaryLayout extends Component {
                     <Route path="/news" component={News} />
                     <Route path="/know-your-candidates" component={Candidates} />
                     <Route path="/election-structure" component={ElectionStructure} />
+                    <Route path="/notifier" component={Notifier} />
                     <Route path="*" render={() => this.props.loading && <img className="loader" src={loader} />}/>
                 </main>
                 <footer>
