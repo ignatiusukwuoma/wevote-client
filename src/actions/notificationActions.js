@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { handleError, throwError } from '../utils/errorHandler';
+import { throwError } from '../utils/errorHandler';
 import {beginAjaxCall} from "./ajaxStatusActions";
 
 const { API_URL } = process.env;
 
 /**
- * Creates a new notification
+ * Send notification to all users
  * @param {object} message
- * @returns {function} saveToken
+ * @returns {function}
  */
 export function sendNotification(message){
     return (dispatch) => {

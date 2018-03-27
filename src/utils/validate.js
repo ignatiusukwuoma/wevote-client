@@ -60,7 +60,7 @@ export function phone({phone}) {
 }
 
 /**
- * Validates the login form
+ * Validates the surname login form
  * @param {object} signInDetails
  * @returns {object} validate
  */

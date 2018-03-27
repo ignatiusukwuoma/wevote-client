@@ -11,11 +11,11 @@ class Notifier extends Component {
         this.state = {
           message: ''
         };
-        this.sendNotification = this.sendNotification.bind(this);
+        this.notify = this.notify.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    sendNotification(){
+    notify(){
         this.props.sendNotification({message: this.state.message})
             .then(() => {
                 toastr.success('Message sent successfully');
@@ -45,7 +45,7 @@ class Notifier extends Component {
                     </textarea>
                     <span>Word count: {this.state.message.length}</span>
                     <button
-                        onClick={this.sendNotification}
+                        onClick={this.notify}
                         type="button"
                     >
                         Send to all users

@@ -27,9 +27,25 @@ const quotes = [
     "Voters must have faith in the electoral system for our democracy to succeed",
     "Ask not what your country can do for you; ask what you can do for your country",
     "You can't fix stupid but you can vote it out",
-    "The most powerful thing we own is our vote"
+    "The most powerful thing we own is our vote",
+    "Your PVC grants you the power to select your leader and make him or her President",
+    "Leadership is not about the next election, it's about the next generation",
+    "In each and every election, it's your rights, it's your freedoms, it's your interests that are on the ballot",
+    "The one sure way of participating in the process of nation-building is to vote on the election day",
+    "Winning or losing of the election is less important than strengthening the country",
+    "This election could come down to just a handful of votes. It could come down to just one vote",
+    "An election cannot give a country a firm sense of direction if it has two or more national parties which merely " +
+    "have different names, but are as alike in their principals and aims as two peas in the same pod",
+    "The political process does not end on Election Day. Young people need to stay involved in the process by " +
+    "continuing to pay attention to the conversation and holding their leaders accountable for the decisions they make",
+    "Voting is a right best exercised by people who have taken time to learn about the issues",
+    "You can’t complain if you don’t vote!"
 ];
 
+/**
+ * Selects a quote to display depending on date
+ * @returns {string} quote
+ */
 function getQuote(){
     return quotes[new Date().getDate()]
 }

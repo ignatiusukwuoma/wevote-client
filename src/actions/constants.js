@@ -9,8 +9,6 @@ const actionTypes = {
     // VRI
     SAVE_VRI_AJAX: 'SAVE_VRI_AJAX',
     GET_USER_VRI_AJAX: 'GET_USER_VRI_AJAX',
-    GET_VRIS_AJAX: 'GET_VRIS_AJAX',
-    SAVE_TEMP_VRI: 'SAVE_TEMP_VRI',
 
     // NEWS
     DISPLAY_NEWS_AJAX: 'DISPLAY_NEWS_AJAX',
@@ -27,17 +25,16 @@ const actionTypes = {
     AJAX_CALL_ERROR: 'AJAX_CALL_ERROR',
 
     // VRI SECTIONS
-    START: 'START',
-    CARD: 'CARD',
-    PROXIMITY: 'PROXIMITY',
-    YEAR: 'YEAR',
-    STATUS: 'STATUS',
     BIO: 'BIO',
+    CARD: 'CARD',
+    YEAR: 'YEAR',
     SAVE: 'SAVE',
-    RESULT: 'RESULT',
+    START: 'START',
     PHONE: 'PHONE',
-    SURNAME: 'SURNAME'
-
+    RESULT: 'RESULT',
+    STATUS: 'STATUS',
+    SURNAME: 'SURNAME',
+    PROXIMITY: 'PROXIMITY',
 };
 
 export default actionTypes;

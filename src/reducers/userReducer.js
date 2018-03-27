@@ -3,6 +3,12 @@ import initialState from "../store/initialState";
 
 const { SIGN_IN_AJAX, SIGN_UP_AJAX, USER_DATA_AJAX, CONFIRM_PHONE_AJAX } = actionTypes;
 
+/**
+ * Manages the state of user
+ * @param state
+ * @param action
+ * @returns {object}
+ */
 export function user(state=initialState.user, action){
     switch(action.type){
         case SIGN_IN_AJAX:
