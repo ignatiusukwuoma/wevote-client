@@ -1,8 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TextInput from '../Forms/TextInput';
 
-const Phone = ({ handleChange, goTo, onPhoneSubmit, signInDetails, errors }) => (
+/**
+ * Phone section during Login
+ */
+const Phone = ({ handleChange, onPhoneSubmit, signInDetails, errors }) => (
     <section className="phone-login">
         <div className="question">
             <p>
@@ -31,5 +35,12 @@ const Phone = ({ handleChange, goTo, onPhoneSubmit, signInDetails, errors }) => 
         </form>
     </section>
 );
+
+Phone.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    onPhoneSubmit: PropTypes.func.isRequired,
+    signInDetails: PropTypes.object.isRequired,
+    errors: PropTypes.object
+};
 
 export default Phone;

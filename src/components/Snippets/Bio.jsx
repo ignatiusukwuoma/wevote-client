@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NaijaStates from 'naija-state-local-government';
 
 import TextInput from '../Forms/TextInput';
@@ -7,6 +8,9 @@ import SelectInput from "../Forms/SelectInput";
 const sexFields = ['Male','Female'];
 const states = NaijaStates.states();
 
+/**
+ * Bio section in VRI test
+ */
 const Bio = ({ handleChange, onBioSubmit, userDetails, errors }) => (
     <section className="bio">
         <div className="question">
@@ -24,7 +28,7 @@ const Bio = ({ handleChange, onBioSubmit, userDetails, errors }) => (
                 handleChange={handleChange}
                 value={userDetails.firstname}
                 error={errors.firstname}
-                require={true}
+                required={true}
             />
             <TextInput
                 id="bio-surname"
@@ -35,7 +39,7 @@ const Bio = ({ handleChange, onBioSubmit, userDetails, errors }) => (
                 handleChange={handleChange}
                 value={userDetails.surname}
                 error={errors.surname}
-                require={true}
+                required={true}
             />
             <div className="sign-up-select-fields">
                 <SelectInput
@@ -46,7 +50,7 @@ const Bio = ({ handleChange, onBioSubmit, userDetails, errors }) => (
                     handleChange={handleChange}
                     value={userDetails.state}
                     error={errors.state}
-                    require={true}
+                    required={true}
                 />
                 <SelectInput
                     id="bio-sex"
@@ -82,5 +86,12 @@ const Bio = ({ handleChange, onBioSubmit, userDetails, errors }) => (
         </form>
     </section>
 );
+
+Bio.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    onBioSubmit: PropTypes.func.isRequired,
+    userDetails: PropTypes.object.isRequired,
+    errors: PropTypes.object
+};
 
 export default Bio;

@@ -24,7 +24,7 @@ export function getNews(){
 
 /**
  * Gets each featured image in the news
- * @param media_id {int} id of the image
+ * @param media_id {number} id of the image
  * @returns {function} dispatches displayImage
  */
 export function getImage(media_id){
@@ -52,9 +52,9 @@ function displayNews(posts) {
 
 /**
  * Creates action to provide a featured image
- * @param post_id {int} id of the related news
+ * @param post_id {number} id of the related news
  * @param source_url {string} url of the featured image
- * @returns {{type: string, payload: {post_id: int, source_url: string}}}
+ * @returns {{type: string, payload: {post_id: number, source_url: string}}}
  */
 function displayImage(post_id, source_url){
     return {

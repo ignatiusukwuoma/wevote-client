@@ -1,10 +1,14 @@
 import React from 'react';
-import card from '../../assets/voters-card.png';
+import PropTypes from 'prop-types';
 
+import card from '../../assets/voters-card.png';
 import actionTypes from '../../actions/constants';
 
-const { PROXIMITY, YEAR, STATUS, BIO } = actionTypes;
+const { PROXIMITY, YEAR, STATUS } = actionTypes;
 
+/**
+ * Voters card section in VRI test
+ */
 const VotersCard = ({ handleChange, goTo }) => (
     <section className="card">
         <div className="question">
@@ -59,5 +63,10 @@ const VotersCard = ({ handleChange, goTo }) => (
         </div>
     </section>
 );
+
+VotersCard.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    goTo: PropTypes.func.isRequired
+};
 
 export default VotersCard;
