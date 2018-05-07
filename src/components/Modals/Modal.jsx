@@ -3,6 +3,9 @@ import { createPortal } from 'react-dom';
 
 const modalRoot = document.getElementById('modal-root');
 
+/**
+ * Component to create a modal
+ */
 class Modal extends Component {
     constructor(props) {
         super(props);

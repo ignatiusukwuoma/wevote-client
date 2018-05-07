@@ -19,3 +19,14 @@ export function sendNotification(message){
             .catch(error => throwError(error, dispatch));
     };
 }
+
+
+export function getNotifications(){
+    return (dispatch) => {
+        return axios.get(`${API_URL}/user/notification`)
+            .then((res) => {
+                console.log('Notification response', res.data);
+            })
+            .catch(error => throwError(error, dispatch));
+    };
+}

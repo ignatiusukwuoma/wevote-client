@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TextInput from '../Forms/TextInput';
 
@@ -31,5 +32,12 @@ const Surname = ({ handleChange, onLoginSubmit, signInDetails, errors }) => (
         </form>
     </section>
 );
+
+Surname.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    signInDetails: PropTypes.object.isRequired,
+    onLoginSubmit: PropTypes.func.isRequired,
+    errors: PropTypes.object
+};
 
 export default Surname;

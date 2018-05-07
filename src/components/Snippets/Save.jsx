@@ -1,7 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TextInput from '../Forms/TextInput';
 
+/**
+ * Last section requesting phone and email in VRI test
+ */
 const Save = ({ handleChange, onSave, userDetails, errors }) => (
     <section className="save">
         <div className="question">
@@ -19,7 +23,7 @@ const Save = ({ handleChange, onSave, userDetails, errors }) => (
                 handleChange={handleChange}
                 value={userDetails.phone}
                 error={errors.phone}
-                require={true}
+                required={true}
             />
             <TextInput
                 id="save-email"
@@ -43,5 +47,12 @@ const Save = ({ handleChange, onSave, userDetails, errors }) => (
         </form>
     </section>
 );
+
+Save.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    userDetails: PropTypes.object.isRequired,
+    onSave: PropTypes.func.isRequired,
+    errors: PropTypes.object
+};
 
 export default Save;

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -8,6 +9,9 @@ import receiveNews from '../../assets/news.png';
 import { inecFiles } from "./Candidates";
 import getQuote from '../../utils/quotes';
 
+/**
+ * Home page
+ */
 class HomePage extends Component {
     constructor(props){
         super(props);
@@ -16,6 +20,9 @@ class HomePage extends Component {
         };
     }
 
+    /**
+     * Gets the quote of the day and saves it in state
+     */
     componentWillMount(){
         this.setState({quote: getQuote()})
     }
@@ -86,6 +93,10 @@ class HomePage extends Component {
         );
     }
 }
+
+HomePage.propTypes = {
+    user: PropTypes.object
+};
 
 function mapStateToProps(state){
     return {

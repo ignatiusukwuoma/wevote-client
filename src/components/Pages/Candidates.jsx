@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import SelectInput from '../Forms/SelectInput';
 
+export const inecFiles = 'http://www.inecnigeria.org/wp-content/uploads/';
 const electionYears = ['2019', '2016', '2015'];
-
 const candidatesIn2015 = [
     ['Presidential', '2015/01/2015-PRESIDENTIAL-LIST-FINAL-13.05.151.xlsx'],
     ['Governorship', '2015/01/2015-GOVERNORSHIP-.xlsx'],
@@ -12,8 +12,9 @@ const candidatesIn2015 = [
     ['State House of Assembly', '2015/01/2015-STATE-ASSEMBLY-CANDIDATES-1.xlsx']
 ];
 
-export const inecFiles = 'http://www.inecnigeria.org/wp-content/uploads/';
-
+/**
+ * Know Your Candidates page
+ */
 class Candidates extends Component {
     constructor(props){
         super(props);
@@ -23,6 +24,10 @@ class Candidates extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    /**
+     * Handles changes in the select box
+     * @param event
+     */
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value})
     }

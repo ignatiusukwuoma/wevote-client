@@ -1,5 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
+/**
+ * VRI test result section
+ */
 const Result = ({recommendations, username, rank, score, openFrame, retakeTest}) => (
     <section className="result">
         <div id="donut-chart">
@@ -75,5 +79,15 @@ const Result = ({recommendations, username, rank, score, openFrame, retakeTest})
         </div>
     </section>
 );
+
+
+Result.propTypes = {
+    recommendations: PropTypes.array,
+    username: PropTypes.string,
+    rank: PropTypes.object,
+    score: PropTypes.number,
+    openFrame: PropTypes.func.isRequired,
+    retakeTest: PropTypes.func.isRequired,
+};
 
 export default Result;

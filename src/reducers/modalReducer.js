@@ -7,7 +7,7 @@ const { MODAL_CHOICE } = actionTypes;
  * Opens the selected modal
  * @param state
  * @param action
- * @returns {string}
+ * @returns {string} state
  */
 export function currentModal(state=initialState.currentModal, action){
     switch(action.type){

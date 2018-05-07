@@ -1,5 +1,8 @@
 import React,{ Component } from 'react';
 
+/**
+ * Election Structure page
+ */
 class ElectionStructure extends Component {
     constructor(props){
         super(props);
