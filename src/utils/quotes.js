@@ -4,8 +4,6 @@ const quotes = [
     "Elections belong to the people. It's their decision. If they decide to turn their back on the fire and burn " +
     "their behinds, then they will just have to sit on their blisters.",
     "A vote is like a rifle: its usefulness depends upon the character of the user.",
-    "The difference between a democracy and a dictatorship is that in a democracy you vote first and take orders later;" +
-    " in a dictatorship you don't have to waste your time voting.",
     "Democracy cannot succeed unless those who express their choice are prepared to choose wisely. " +
     "The real safeguard of democracy, therefore, is education.",
     "Democracy is not just the right to vote, it is the right to live in dignity.",

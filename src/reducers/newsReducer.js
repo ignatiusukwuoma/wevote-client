@@ -39,7 +39,7 @@ function addImageToPost(state, payload){
  * Manages the state of news
  * @param state
  * @param action
- * @returns {array}
+ * @returns {array} state
  */
 export function news(state=initialState.news, action){
     switch(action.type){

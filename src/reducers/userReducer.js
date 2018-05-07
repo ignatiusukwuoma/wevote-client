@@ -7,7 +7,7 @@ const { SIGN_IN_AJAX, SIGN_UP_AJAX, USER_DATA_AJAX, CONFIRM_PHONE_AJAX } = actio
  * Manages the state of user
  * @param state
  * @param action
- * @returns {object}
+ * @returns {object} state
  */
 export function user(state=initialState.user, action){
     switch(action.type){

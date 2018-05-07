@@ -7,6 +7,7 @@ import { getUser } from "../../actions/userActions";
 import { getUserVri } from "../../actions/vriActions";
 import setAccessToken from "../../utils/setAccessToken";
 import generateBatteryInfo from '../../utils/generateBatteryInfo';
+import { getNotifications } from '../../actions/notificationActions';
 
 /**
  * Navigation Bar connected component
@@ -35,6 +36,7 @@ class NavigationBar extends Component {
     componentDidMount(){
         if (this.props.user.isAuthenticated && !this.props.user.profile){
             this.props.getUser(this.props.user.uuid);
+            this.props.getNotifications();
         }
         if (this.props.user.isAuthenticated && !this.props.vri.responses){
             this.props.getUserVri();
@@ -155,4 +157,4 @@ function mapStateToProps(state){
     };
 }
 
-export default connect(mapStateToProps, { getUser, getUserVri })(NavigationBar);
+export default connect(mapStateToProps, { getUser, getUserVri, getNotifications })(NavigationBar);
