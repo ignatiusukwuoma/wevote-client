@@ -1,3 +1,9 @@
+/**
+ * Generates color, type and content of battery
+ * @param {int} score
+ * @param {object} responses
+ * @returns {object} batteryInfo
+ */
 function generateBatteryInfo(score, responses){
     let batteryInfo = {};
     if (score === 0){

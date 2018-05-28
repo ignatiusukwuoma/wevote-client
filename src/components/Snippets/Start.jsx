@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import vote from '../../assets/vote.png';
+import PropTypes from 'prop-types';
 
+import vote from '../../assets/vote.png';
 import actionTypes from '../../actions/constants';
 
 const { CARD } = actionTypes;
 
+/**
+ * First section introducing the VRI test
+ */
 const Start = ({ handleChange, goTo }) => (
     <section className="start">
         <div className="question">
@@ -37,5 +41,10 @@ const Start = ({ handleChange, goTo }) => (
         </div>
     </section>
 );
+
+Start.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    goTo: PropTypes.func.isRequired
+};
 
 export default Start;

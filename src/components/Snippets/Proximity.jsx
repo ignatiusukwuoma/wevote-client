@@ -1,10 +1,14 @@
 import React from 'react';
-import center from '../../assets/voting-center.jpg';
+import PropTypes from 'prop-types';
 
 import actionTypes from '../../actions/constants';
+import center from '../../assets/voting-center.jpg';
 
 const { BIO } = actionTypes;
 
+/**
+ * Proximity section in VRI test
+ */
 const Proximity = ({ handleChange, goTo, user, saveNewVri }) => (
     <section className="proximity">
         <div className="question">
@@ -47,5 +51,12 @@ const Proximity = ({ handleChange, goTo, user, saveNewVri }) => (
         </div>
     </section>
 );
+
+Proximity.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    saveNewVri: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    goTo: PropTypes.func.isRequired
+};
 
 export default Proximity;

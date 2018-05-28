@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Start from '../Snippets/Start';
@@ -11,7 +12,6 @@ import Save from '../Snippets/Save';
 import Result from '../Snippets/Result';
 import Stepper from 'react-stepper-horizontal';
 import { isMobile } from 'react-device-detect';
-
 import { signUp, getUser } from '../../actions/userActions';
 import { saveVri, getUserVri } from '../../actions/vriActions';
 import { handleError } from "../../utils/errorHandler";
@@ -19,10 +19,13 @@ import generateRank from "../../utils/generateRank";
 import generateRecommendations from '../../utils/generateRecommendations';
 import * as validate from "../../utils/validate";
 import drawDonutChart from '../../assets/progressbar.js';
-
 import actionTypes from '../../actions/constants';
+
 const { START, CARD, PROXIMITY, YEAR, STATUS, BIO, SAVE, RESULT } = actionTypes;
 
+/**
+ * Voter Readiness page
+ */
 class VoterReadiness extends Component {
 	sections = [START, CARD, STATUS, YEAR, PROXIMITY, BIO, SAVE];
     constructor(props){
@@ -63,6 +66,11 @@ class VoterReadiness extends Component {
         this.onSave = this.onSave.bind(this);
     }
 
+    /**
+     * Load Facebook and Twitter SDKs for social sharing
+     * Load Google charts for D3 and display result of
+     * user if user has previously checked VRI
+     */
     componentDidMount(){
         // Load Facebook SDK for JavaScript
         (function(d, s, id) {
@@ -103,6 +111,10 @@ class VoterReadiness extends Component {
         }
     }
 
+    /**
+     * Display result if user recently checks VRI
+     * @param {object} nextProps
+     */
     componentWillReceiveProps(nextProps){
         if (nextProps.user.isAuthenticated && !nextProps.vri.responses){
             this.props.getUserVri();
@@ -115,6 +127,11 @@ class VoterReadiness extends Component {
         }
     }
 
+    /**
+     * Sets the state with rank and recommendations for user
+     * @param {object} props
+     * @param {function} callback
+     */
     generateResult(props, callback){
         this.setState({
             section: RESULT,
@@ -124,17 +141,28 @@ class VoterReadiness extends Component {
         }, () => callback());
     }
 
+    /**
+     * Display D3 chart containing user score
+     */
     displayResult(){
         const donutChart = document.getElementById('donut-chart');
         drawDonutChart(donutChart, this.state.score, 500, 500, '.56em')
     }
 
+    /**
+     * Save user responses to state
+     * @param event
+     */
     handleChange(event) {
         const responses = this.state.responses;
         responses[event.target.name] = event.target.id;
         this.setState({ responses });
     }
 
+    /**
+     * Make request to save user details and responses to database
+     * @param event
+     */
     onSave(event) {
         event.preventDefault();
         const { valid, errors } = validate.save(this.state.userDetails);
@@ -153,6 +181,10 @@ class VoterReadiness extends Component {
         }
     }
 
+    /**
+     * Validates entries in the Bio form
+     * @param event
+     */
     onBioSubmit(event) {
         event.preventDefault();
         const { valid, errors } = validate.bio(this.state.userDetails);
@@ -163,28 +195,48 @@ class VoterReadiness extends Component {
         }
     }
 
+    /**
+     * Save user details to state
+     * @param event
+     */
     handleSignUpChange(event) {
         const userDetails = this.state.userDetails;
         userDetails[event.target.name] = event.target.value.substr(0, 50);
         this.setState({ userDetails });
     }
 
+    /**
+     * Proceed to the section passed as argument
+     * @param {string} section
+     */
     goToNext(section) {
         this.setState({ section, currentStep: this.sections.indexOf(section) });
     }
 
+    /**
+     * Open iframe
+     */
     openFrame(){
         this.setState({ showFrame: true})
     }
 
+    /**
+     * Close iframe
+     */
     closeFrame(){
         this.setState({ showFrame: false})
     }
 
+    /**
+     * Restart the VRI test
+     */
     retakeTest(){
         this.setState({ section: START, responses: {} })
     }
 
+    /**
+     * Save the new VRI
+     */
     saveNewVri(){
         this.props.saveVri(this.state.responses)
             .then(() => {
@@ -198,10 +250,6 @@ class VoterReadiness extends Component {
             currentStep, errors, rank, recommendations } = this.state;
         return (
             <div className="vri">
-                <div id="fb-root">
-                </div>
-                <div id="twitter-wjs">
-                </div>
                 {section !== RESULT &&
                 <Stepper
 					className="steps"
@@ -237,6 +285,8 @@ class VoterReadiness extends Component {
                 <RegistrationStatus
                     handleChange={this.handleChange}
                     goTo={this.goToNext}
+                    user={this.props.user}
+                    saveNewVri={this.saveNewVri}
                 />}
                 {section === BIO &&
                 <Bio
@@ -272,6 +322,15 @@ class VoterReadiness extends Component {
         );
     }
 }
+
+VoterReadiness.propTypes = {
+    user: PropTypes.object,
+    vri: PropTypes.object,
+    signUp: PropTypes.func.isRequired,
+    saveVri: PropTypes.func.isRequired,
+    getUser: PropTypes.func.isRequired,
+    getUserVri: PropTypes.func.isRequired
+};
 
 function mapStateToProps(state){
     return {

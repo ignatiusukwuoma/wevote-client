@@ -1,5 +1,5 @@
 import actionTypes from './constants';
-const { BEGIN_AJAX_CALL, AJAX_CALL_ERROR} = actionTypes;
+const { BEGIN_AJAX_CALL, AJAX_CALL_ERROR } = actionTypes;
 
 /**
  * Action creator that's called when ajax call begins
@@ -10,7 +10,7 @@ export function beginAjaxCall() {
 }
 
 /**
- * Action creator that starts when ajax call ends
+ * Action creator called on ajax call error
  * @returns {object} action
  */
 export function ajaxCallError() {

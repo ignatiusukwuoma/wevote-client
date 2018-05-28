@@ -3,6 +3,11 @@ import initialState from '../store/initialState';
 
 const { DISPLAY_NEWS_AJAX, DISPLAY_IMAGE } = actionTypes;
 
+/**
+ * Extracts the news details to display
+ * @param {object} post
+ * @returns {{id, date, link, title: string, media: int, excerpt: string}}
+ */
 function getRelevantDetails(post){
     return {
         id: post.id,
@@ -14,6 +19,12 @@ function getRelevantDetails(post){
     };
 }
 
+/**
+ * Adds featured image to its related post
+ * @param state
+ * @param payload
+ * @returns {array} posts
+ */
 function addImageToPost(state, payload){
     let posts = state.slice();
     let postIndex = posts.findIndex(post =>
@@ -24,6 +35,12 @@ function addImageToPost(state, payload){
     return posts;
 }
 
+/**
+ * Manages the state of news
+ * @param state
+ * @param action
+ * @returns {array} state
+ */
 export function news(state=initialState.news, action){
     switch(action.type){
         case DISPLAY_NEWS_AJAX:

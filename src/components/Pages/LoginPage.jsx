@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Phone from '../Snippets/Phone';
 import Surname from '../Snippets/Surname';
-
 import { confirmPhone, signIn, getUser } from '../../actions/userActions';
 import * as validate from "../../utils/validate";
-import actionTypes from '../../actions/constants';
 import {handleError} from "../../utils/errorHandler";
+import actionTypes from '../../actions/constants';
+
 const { PHONE, SURNAME } = actionTypes;
 
+/**
+ * Login page
+ */
 class LoginPage extends Component {
     constructor(props){
         super(props);
@@ -26,22 +30,37 @@ class LoginPage extends Component {
         this.onLoginSubmit = this.onLoginSubmit.bind(this);
     }
 
+    /**
+     * Displays the confirm surname field if phone number is registered
+     * @param {object} nextProps
+     */
     componentWillReceiveProps(nextProps){
         if (this.props.user.surname !== nextProps.user.surname) {
             this.goToNext(SURNAME);
         }
     }
 
+    /**
+     * Sets entries in the login fields in state
+     * @param {object} event
+     */
     handleChange(event) {
         const signInDetails = this.state.signInDetails;
         signInDetails[event.target.name] = event.target.value;
         this.setState({ signInDetails });
     }
 
+    /**
+     * Moves to the section passed as argument
+     * @param {string} section
+     */
     goToNext(section) {
         this.setState({ section });
     }
 
+    /**
+     * Confirms the phone number from backend when entered
+     */
     onPhoneSubmit() {
         event.preventDefault();
         const { valid, errors } = validate.phone(this.state.signInDetails);
@@ -52,6 +71,9 @@ class LoginPage extends Component {
         }
     }
 
+    /**
+     * Logs in the user when surname is confirmed
+     */
     onLoginSubmit() {
         event.preventDefault();
         const { valid, errors } = validate.surname(this.state.signInDetails);
@@ -91,6 +113,13 @@ class LoginPage extends Component {
         );
     }
 }
+
+LoginPage.propTypes = {
+    user: PropTypes.object,
+    confirmPhone: PropTypes.func.isRequired,
+    getUser: PropTypes.func.isRequired,
+    signIn: PropTypes.func.isRequired
+};
 
 function mapStateToProps(state){
     return {

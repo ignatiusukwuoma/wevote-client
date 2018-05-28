@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 
@@ -6,7 +7,11 @@ import { getUser } from "../../actions/userActions";
 import { getUserVri } from "../../actions/vriActions";
 import setAccessToken from "../../utils/setAccessToken";
 import generateBatteryInfo from '../../utils/generateBatteryInfo';
+import { getNotifications } from '../../actions/notificationActions';
 
+/**
+ * Navigation Bar connected component
+ */
 class NavigationBar extends Component {
     constructor(props) {
         super(props);
@@ -24,9 +29,14 @@ class NavigationBar extends Component {
         this.logout = this.logout.bind(this);
     }
 
+    /**
+     * Gets the details of the current user, their VRI, then
+     * generate battery information and saves it in state
+     */
     componentDidMount(){
         if (this.props.user.isAuthenticated && !this.props.user.profile){
             this.props.getUser(this.props.user.uuid);
+            this.props.getNotifications();
         }
         if (this.props.user.isAuthenticated && !this.props.vri.responses){
             this.props.getUserVri();
@@ -38,6 +48,11 @@ class NavigationBar extends Component {
         }
     }
 
+    /**
+     * Generates battery information and sets it in state
+     * when user recently checks their VRI
+     * @param {object} nextProps
+     */
     componentWillReceiveProps(nextProps){
         if (nextProps.vri.score !== this.props.vri.score){
             const {batteryType, batteryColor,
@@ -46,14 +61,23 @@ class NavigationBar extends Component {
         }
     }
 
+    /**
+     * Opens and closes the navigation menu links on mobile
+     */
     toggleNav(){
         this.setState({navOpen: !this.state.navOpen})
     }
 
+    /**
+     * Closes the navigation menu links on mobile
+     */
     closeNav(){
         if (this.state.navOpen) this.toggleNav();
     }
 
+    /**
+     * Logs out a user from the application
+     */
     logout(){
         localStorage.removeItem('wevote');
         setAccessToken(null);
@@ -119,6 +143,13 @@ class NavigationBar extends Component {
     }
 }
 
+NavigationBar.propTypes = {
+    user: PropTypes.object,
+    vri: PropTypes.object,
+    getUser: PropTypes.func.isRequired,
+    getUserVri: PropTypes.func.isRequired
+};
+
 function mapStateToProps(state){
     return {
         user: state.user,
@@ -126,4 +157,4 @@ function mapStateToProps(state){
     };
 }
 
-export default connect(mapStateToProps, { getUser, getUserVri })(NavigationBar);
+export default connect(mapStateToProps, { getUser, getUserVri, getNotifications })(NavigationBar);

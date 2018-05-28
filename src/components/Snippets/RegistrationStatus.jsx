@@ -1,11 +1,15 @@
 import React from 'react';
-import voter from '../../assets/voter.jpg';
+import PropTypes from 'prop-types';
 
+import voter from '../../assets/voter.jpg';
 import actionTypes from '../../actions/constants';
 
 const { YEAR, BIO } = actionTypes;
 
-const RegistrationStatus = ({ handleChange, goTo }) => (
+/**
+ * Registration status section in VRI test
+ */
+const RegistrationStatus = ({ handleChange, goTo, user, saveNewVri }) => (
     <section className="status">
         <div className="question">
             <p>
@@ -29,7 +33,11 @@ const RegistrationStatus = ({ handleChange, goTo }) => (
             <input
                 onClick={(event) => {
                     handleChange(event);
-                    goTo(BIO)
+                    if (user.isAuthenticated){
+                        saveNewVri();
+                    } else {
+                        goTo(BIO);
+                    }
                 }}
                 value="No"
                 type="submit"
@@ -39,5 +47,12 @@ const RegistrationStatus = ({ handleChange, goTo }) => (
         </div>
     </section>
 );
+
+RegistrationStatus.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    saveNewVri: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    goTo: PropTypes.func.isRequired
+};
 
 export default RegistrationStatus;

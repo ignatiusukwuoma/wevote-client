@@ -1,3 +1,8 @@
+/**
+ * Generates recommendations shown in VRI page
+ * @param {object} responses
+ * @returns {array} recommendations
+ */
 function generateRecommendations(responses) {
     let recommendations = [];
     if(responses.Q2){

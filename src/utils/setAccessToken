@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 /**
- * Sets the token for use by ajax calls
+ * Sets the token on header for use by ajax calls
  * @param {number} token
  */
 export default function setAccessToken(token) {

@@ -1,10 +1,14 @@
 import React from 'react';
-import year from '../../assets/registration-year.jpg';
+import PropTypes from 'prop-types';
 
 import actionTypes from '../../actions/constants';
+import year from '../../assets/registration-year.jpg';
 
 const { PROXIMITY } = actionTypes;
 
+/**
+ * Registration Year section in VRI test
+ */
 const RegistrationYear = ({ handleChange, goTo }) => (
     <section className="year">
         <div className="question">
@@ -59,5 +63,10 @@ const RegistrationYear = ({ handleChange, goTo }) => (
         </div>
     </section>
 );
+
+RegistrationYear.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    goTo: PropTypes.func.isRequired
+};
 
 export default RegistrationYear;

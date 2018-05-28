@@ -5,7 +5,7 @@ import { ajaxCallError } from "../actions/ajaxStatusActions";
  * Handles errors from ajax calls
  * @param {object} error
  * @param {function} dispatch
- * @returns {function} error display
+ * @returns {function} toastr error
  */
 export function handleError(error, dispatch) {
     if (dispatch) {

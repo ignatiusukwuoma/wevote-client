@@ -3,6 +3,11 @@ import citizen from '../assets/citizen.gif';
 import patroit from '../assets/patroit.jpg';
 import knight from '../assets/knight.png';
 
+/**
+ * Generates the rank after user checks VRI
+ * @param {int} score
+ * @returns {object} rank
+ */
 function generateRank(score) {
     let rank = {};
     if (score < 25) {

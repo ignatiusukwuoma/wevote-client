@@ -3,9 +3,8 @@ import initialState from "../store/initialState";
 
 const { BEGIN_AJAX_CALL, AJAX_CALL_ERROR } = actionTypes;
 
-
 /**
- * Check if a ajax action is dispatched
+ * Check if an ajax action is dispatched
  * @param {string} type
  * @returns {boolean}
  */
@@ -13,12 +12,11 @@ function isAjax(type) {
     return type.substring(type.length - 5) === '_AJAX';
 }
 
-
 /**
  * Reducer for ajax calls
  * @param {number} [state=initialState.ajaxCallsInProgress]
  * @param {object} action
- * @returns {number}
+ * @returns {number} state
  */
 export default function ajaxStatusReducer(state = initialState.ajaxCallsInProgress, action) {
     if (action.type === BEGIN_AJAX_CALL) {
