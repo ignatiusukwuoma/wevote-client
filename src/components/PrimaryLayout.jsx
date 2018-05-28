@@ -12,6 +12,8 @@ import VoterReadiness from './Pages/VoterReadiness';
 import Candidates from './Pages/Candidates';
 import ElectionStructure from './Pages/ElectionStructure';
 import Notifier from "./Pages/Notifier";
+import Community from "./Pages/Community";
+
 
 import { login, selectModal } from '../actions/userActions';
 import setAccessToken from "../utils/setAccessToken";
@@ -81,6 +83,7 @@ class PrimaryLayout extends Component {
                     <Route path="/know-your-candidates" component={Candidates} />
                     <Route path="/election-structure" component={ElectionStructure} />
                     <Route path="/notifier" component={Notifier} />
+                    <Route path="/community" component={Community} />
                     <Route path="*" render={() => this.props.loading && <img className="loader" src={loader} />}/>
                 </main>
                 <footer>
